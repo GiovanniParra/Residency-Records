@@ -48,6 +48,14 @@ components.html(
     """, height=0
 )
 
+# FORCE DARK MODE
+st.markdown("""
+    <script>
+        var elements = window.parent.document.getElementsByTagName('html')[0];
+        elements.setAttribute('data-theme', 'dark');
+    </script>
+    """, unsafe_allow_html=True)
+
 # --- 2. THEME & TYPOGRAPHY ---
 st.markdown("""
     <style>
@@ -209,4 +217,5 @@ if files:
                      category_orders={"Month": month_order},
                      color_discrete_map={"INSIDE US": "#60A5FA", "INTERNATIONAL": "#FFFFFF"})
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font=dict(family="Montserrat", color="#E2E8F0"))
+
         st.plotly_chart(fig, use_container_width=True)
