@@ -219,3 +219,14 @@ if files:
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font=dict(family="Montserrat", color="#E2E8F0"))
 
         st.plotly_chart(fig, use_container_width=True)
+
+# FOOTER WITH PRIVACY NOTICE
+st.markdown("<br><br>", unsafe_allow_html=True)
+st.divider()
+st.markdown("""
+    <div style='text-align: center; color: #94A3B8; font-size: 0.8rem;'>
+        <h4>🔒 PRIVACY & DATA SECURITY</h4>
+        <p>Your location data is processed locally in memory and is <b>never stored</b> on our servers.<br>
+        All data is wiped instantly when you close this browser tab.</p>
+    </div>
+""", unsafe_allow_html=True)
