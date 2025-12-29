@@ -13,7 +13,7 @@ import plotly.express as px
 import streamlit.components.v1 as components
 
 # --- 1. PAGE CONFIG & BACKGROUND ---
-st.set_page_config(page_title="RESIDENCY RECORDS", page_icon="⚖️", layout="wide")
+st.set_page_config(page_title="TAX RESIDENCY STATUS", page_icon="⚖️", layout="wide")
 
 components.html(
     """
@@ -108,7 +108,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # --- 3. UI LAYOUT ---
-st.markdown("<h1 style='text-align:center; margin-bottom:0;'>RESIDENCY RECORDS</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center; margin-bottom:0;'>TAX RESIDENCY STATUS</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align:center; color:#94A3B8; letter-spacing:4px; font-size:0.75rem; margin-bottom:2rem; text-transform:uppercase;'>SUBSTANTIAL PRESENCE TEST (SPT) VERIFICATION</p>", unsafe_allow_html=True)
 
 st.markdown('<div class="Residency-anchor"></div>', unsafe_allow_html=True)
@@ -230,3 +230,4 @@ st.markdown("""
         All data is wiped instantly when you close this browser tab.</p>
     </div>
 """, unsafe_allow_html=True)
+
