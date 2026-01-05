@@ -3,4 +3,5 @@ pandas
 pyshp
 shapely
 requests
+XlsxWriter
 plotly
