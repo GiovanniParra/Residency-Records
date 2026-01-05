@@ -199,6 +199,38 @@ if files:
     m3.metric(f"{audit_year-2} TOTAL", d_old)
     m4.metric("SPT SCORE", round(score, 1))
 
+
+    ledger_df = pd.DataFrame(
+        [{"DATE": d, "STATUS": "INSIDE US" if v else "INTERNATIONAL"} 
+         for d, v in daily_log.items() if d.startswith(str(audit_year))]
+    ).sort_values("DATE")
+
+    buffer = BytesIO()
+    with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+        ledger_df.to_excel(writer, index=False, sheet_name='AUDIT_LOG')
+        workbook = writer.book
+        worksheet = writer.sheets['AUDIT_LOG']
+
+        fmt_base = workbook.add_format({'bg_color': '#0F172A', 'font_color': '#E2E8F0', 'border': 0})
+        fmt_header = workbook.add_format({'bg_color': '#1E293B', 'font_color': '#60A5FA', 'bold': True, 'align': 'center', 'bottom': 1, 'bottom_color': '#334155'})
+        fmt_us = workbook.add_format({'bg_color': '#0F172A', 'font_color': '#4ADE80'})
+        fmt_intl = workbook.add_format({'bg_color': '#0F172A', 'font_color': '#F87171'})
+
+        worksheet.set_column('A:B', 25)
+        worksheet.write_row(0, 0, ledger_df.columns, fmt_header)
+
+        for row_num, (index, row) in enumerate(ledger_df.iterrows()):
+            status_fmt = fmt_us if row['STATUS'] == "INSIDE US" else fmt_intl
+            worksheet.write(row_num + 1, 0, row['DATE'], fmt_base)
+            worksheet.write(row_num + 1, 1, row['STATUS'], status_fmt)
+
+    st.download_button(
+        label="📥 DOWNLOAD LEDGER (.XLSX)",
+        data=buffer.getvalue(),
+        file_name=f"residency_ledger_{audit_year}.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        type="secondary"
+    )
     # --- 6. CHART ---
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("<h3>TRAVEL PATTERN ANALYSIS</h3>", unsafe_allow_html=True)
@@ -230,5 +262,6 @@ st.markdown("""
         All data is wiped instantly when you close this browser tab.</p>
     </div>
 """, unsafe_allow_html=True)
+
 
 
