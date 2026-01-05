@@ -12,6 +12,7 @@ from zipfile import ZipFile
 import plotly.express as px
 import streamlit.components.v1 as components
 
+
 # --- 1. PAGE CONFIG & BACKGROUND ---
 st.set_page_config(page_title="TAX RESIDENCY STATUS", layout="wide")
 
@@ -262,6 +263,7 @@ st.markdown("""
         All data is wiped instantly when you close this browser tab.</p>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
